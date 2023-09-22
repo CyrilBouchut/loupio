@@ -8,6 +8,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    const DefaultValue = array(
+        'id' => 0,
+        'name' => '',
+        'email' => '',
+        'password' => '',
+    );
     use Notifiable;
 
     /**
