@@ -24,3 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Utilisateur
+Route::get('users', 'UsersController@index');
+Route::get('newUser', 'UsersController@new');
+Route::post('editUser/{id}', 'UsersController@postEdit')->where('id', '[0-9]+');
