@@ -14,8 +14,13 @@ class ExercicesRepository  extends AbstractRepository
         $this->MainTable='questions';
     }
     public function getRandom($dejaVu){
-        $Question=$this->mainModel->inRandomOrder()->first();
-        return ($Question->toArray());
+        $Question=$this->mainModel->whereNotIn('id', $dejaVu)->inRandomOrder()->first();
+        if ($Question==null){
+            $arrQuestion=array();
+        } else {
+            $arrQuestion=$Question->toArray();
+        }
+        return ($arrQuestion);
     }
     
 }

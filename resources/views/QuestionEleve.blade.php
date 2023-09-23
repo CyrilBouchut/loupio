@@ -9,8 +9,10 @@
 				</div>
 
 				<div class="card-body">
-
-					{!! Form::open(['url' => 'postQuestion/'.$quest['id']]) !!} 
+@if (empty($quest)==true)
+Il n'y a plus de questions en stock !
+@else
+					{!! Form::open(['url' => 'exercice/'.$type]) !!} 
 				
 					
 					@foreach( $quest as $field=>$value) 
@@ -19,14 +21,22 @@
     					@if ($field=='id' or $field=='question')
     					    {!! Form::label($field, $field.' : ') !!} 
     						{!! Form::label($field,$value)!!}</br>
-    					@elseif  ($field=='reponse' or $field=='adresseImage')
+    					@elseif  ( $field=='adresseImage')
     					    {!! Form::label($field, $field.' : ') !!}
-                        	{!!Form::text($field,$value )!!}</br>                         	
+                        	{!!Form::text($field,$value )!!}</br>        
+    					@elseif  ($field=='reponse' )                        	
+							{!! Form::hidden($field,$value) !!}                        	                 	
     					@else 		
     					@endif 			
 					@endforeach 
-					{!!Form::submit('Enregistrer', array('class' => 'btn btn-primary'))!!} {!! Form::close() !!}
-
+					{!! Form::hidden('dejaVu', $dejaVu) !!}
+					{!! Form::hidden('NbrTentative', $NbrTentative) !!}
+					{!!Form::submit('Enregistrer', array('class' => 'btn btn-primary'))!!} 
+	
+	
+					
+					{!! Form::close() !!}
+@endif 		
 	
 	
 				</div>

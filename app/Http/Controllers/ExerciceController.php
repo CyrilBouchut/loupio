@@ -29,8 +29,21 @@ class ExerciceController extends Controller
     {
         $arrDejaVu=array();
         $question = $this->mainRepository->getRandom($arrDejaVu=array());    
-        var_dump($question);
-        return view('QuestionEleve', array('quest'=>$question));
+        $NbrTentative=1;
+        $arrDejaVu[]=$question['id'];
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type));
+        
+    }
+    public function postExercice($type='', Request $request)
+    {
+        $arrDejaVu =json_decode( $request->input('dejaVu'));       
+        $question = $this->mainRepository->getRandom($arrDejaVu);
+        $NbrTentative=1;
+        if ($question!=null){            
+            $arrDejaVu[]=$question['id'];
+        }
+                  
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type));
         
     }
     
