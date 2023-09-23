@@ -18,12 +18,14 @@ class Controller extends BaseController
     }
     public function getEdit($id, $RechercheTiers = '')
     {
+       
         return $this->getAbstract($id);
     }
     protected function getAbstract($id)
     {
-        
+        echo $id;die;
         $item =  $this->mainRepository->getById($id);
+       
         $arr = $this->getValues($item);
         $arr['fields'] = $arr;
         if (isset($this->arrToAddToView)){
@@ -32,6 +34,7 @@ class Controller extends BaseController
         if (isset($this->arrToAddToView)){
             $arr=array_merge($arr,$this->arrToAddToView);
         }
+       
         return view('edit' . ucfirst($this->MainItem), $arr);
     }
     protected  function getValues($item)

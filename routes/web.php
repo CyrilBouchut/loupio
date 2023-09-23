@@ -30,3 +30,11 @@ Route::get('users', 'UsersController@index');
 Route::get('newUser', 'UsersController@new');
 Route::post('editUser/{id}', 'UsersController@postEdit')->where('id', '[0-9]+');
 Route::get('editUser/{id}', 'UsersController@getEdit')->where('id', '[0-9]+');
+//Exercices
+Route::get('exercice/{type}', 'ExerciceController@getExercice');
+Route::post('exercice/{type}', 'ExerciceController@postExercice');
+
+
+
+
+

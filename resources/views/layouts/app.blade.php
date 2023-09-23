@@ -67,8 +67,8 @@
                                     Menu élève <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="navbar-brand" class="dropdown-item" href="{{ url('/pageComptable') }}">                
-                   						 {{ __('Exercice') }}
+                                    <a class="navbar-brand" class="dropdown-item" href="{{ url('/exercice/random') }}">                
+                   						 {{ __('Exercice aléatoire') }}
               						</a>            
             						             
                                 </div>                                
