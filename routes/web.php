@@ -36,9 +36,9 @@ Route::post('exercice/{type}', 'ExerciceController@postExercice');
 
 //listeQuestions
 Route::get('listeQuestions', 'QuestionsController@index');
-Route::get('newQuestion', 'QuestionsController@new');
-Route::post('editQuestion/{id}', 'QuestionsController@postEdit')->where('id', '[0-9]+');
-Route::get('editQuestion/{id}', 'QuestionsController@getEdit')->where('id', '[0-9]+');
+Route::get('newQuestions', 'QuestionsController@new');
+Route::post('editQuestions/{id}', 'QuestionsController@postEdit')->where('id', '[0-9]+');
+Route::get('editQuestions/{id}', 'QuestionsController@getEdit')->where('id', '[0-9]+');
 
 /*Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
 

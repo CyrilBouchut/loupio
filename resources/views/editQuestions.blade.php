@@ -10,7 +10,7 @@
 
 				<div class="card-body">
 
-					{!! Form::open(['url' => 'editQuestion/'.$id,'enctype'=>'multipart/form-data']) !!} 
+					{!! Form::open(['url' => 'editQuestions/'.$id,'enctype'=>'multipart/form-data']) !!} 
 					{!!Form::submit('Enregistrer', array('class' => 'btn btn-primary','name'=>'action'))!!}					
 					</br></br>
 					<img src="{{asset('/uploads/' . $fields['adresseImage'])}}" class="img-responsive"></br>
@@ -18,6 +18,8 @@
 					{!! Form::label($field, $field.' : ') !!}
 					@if ($field=='id') 
 					{!! Form::label($field,$$field )!!}</br>
+					@elseif ($field=='adresseImage') 
+					{!!Form::text($field,$$field,['readonly'=>'readonly', 'disabled'=>true] )!!}</br>
 					@else
                     {!!Form::text($field,$$field )!!}</br> 
 					@endif 

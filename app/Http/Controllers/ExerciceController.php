@@ -20,8 +20,7 @@ class ExerciceController extends Controller
     }
 
     public function index($recherche='')
-    {       
-        echo 'test';die;
+    {               
         return parent::index('');
     }
   
@@ -40,7 +39,7 @@ class ExerciceController extends Controller
         if ($request->input('reponseEleve')==$request->input('reponse')){
             $remarqueTop='Dernière réponse correcte';
         } else {
-            $remarqueTop='Dernière réponse fausse';
+            $remarqueTop='Dernière réponse fausse. Bonne réponse : '.$request->input('reponse');
         }
              
         $arrDejaVu =json_decode( $request->input('dejaVu'));       

@@ -8,6 +8,7 @@ class Questions extends Model
 
     const DefaultValue = array(
         'id' => 0,
+        'libelleProf'=>'',
         'question'=>'',    
         'reponse'=>'',
         'adresseImage'=>'',

@@ -10,6 +10,25 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function new()
+    {
+        $arr = $this->MainModel::DefaultValue;
+        foreach($arr as $key=>$value){
+            if (substr($key,0,4)=='date' and $value=='today'){
+                $arr[$key]=date('d/m/Y');
+            }
+            if (substr($key,0,4)=='date' and $value=='empty'){
+                $arr[$key]='';
+            }
+        }
+        $arr['id'] = 0;
+        if (isset($this->arrToAddToView)){
+            $arr=array_merge($arr,$this->arrToAddToView);
+        }
+        $arr['fields'] = $arr;
+        unset($arr['fields']['arrTva']);
+        return view('edit'.ucfirst($this->MainItem), $arr);
+    }
     public function index($rechercher = '')
     {
         

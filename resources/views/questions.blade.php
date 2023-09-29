@@ -23,9 +23,9 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nom</th>
-						<th></th>
-						<th></th>
+						<th>Libellé prof</th>
+						<th>question</th>
+						<th>reponse</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -33,7 +33,9 @@
 					@foreach ($questions as $question)
 						<tr>
 							<td>{!! $question->id !!}</td>
-							<td class="text-primary"><strong><a href="{{ url('/editQuestion').'/'.$question->id }}">{!! $question->question!!}</a></strong></td>							 
+							<td class="text-primary"><strong><a href="{{ url('/editQuestions').'/'.$question->id }}">{!! $question->libelleProf!!}</a></strong></td>							 
+							<td class="text-primary"><strong><a href="{{ url('/editQuestions').'/'.$question->id }}">{!! $question->question!!}</a></strong></td>
+							<td class="text-primary"><strong><a href="{{ url('/editQuestions').'/'.$question->id }}">{!! $question->reponse!!}</a></strong></td>
 						</tr>
 					@endforeach
 	  			</tbody>

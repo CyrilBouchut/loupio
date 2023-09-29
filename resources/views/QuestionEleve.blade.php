@@ -4,26 +4,23 @@
 		<div class="col-md-8">
 			<div class="card">
 				<div class="card-header">
-					Edition des tiers <a href="{{ url('/tiers') }}">retour liste des
-						tiers</a>
+					Question ?
 				</div>
 
 				<div class="card-body">
 @if (empty($quest)==true)
 	Il n'y a plus de questions en stock !
+	{!!Form::text('remarqueTop',$remarqueTop,['id'=>'remarqueTop','readonly'=>'readonly', 'disabled'=>true,'size' => 50] )!!}</br>
 @else
 	{!! Form::open(['url' => 'exercice/'.$type,'id'=>'frmProduct']) !!} 
 
-	{!!Form::text('remarqueTop',$remarqueTop,['id'=>'remarqueTop','readonly'=>'readonly', 'disabled'=>true] )!!}</br>
+	{!!Form::text('remarqueTop',$remarqueTop,['id'=>'remarqueTop','readonly'=>'readonly', 'disabled'=>true,'size' => 50] )!!}</br>
 	@foreach( $quest as $field=>$value) 
 	     
 		
 		@if ($field=='id' or $field=='question')
 		    {!! Form::label($field, $field.' : ') !!} 
 			{!! Form::label($field,$value)!!}</br>
-		@elseif  ( $field=='adresseImage')
-		    {!! Form::label($field, $field.' : ') !!}
-        	{!!Form::text($field,$value )!!}</br>        
 		@elseif  ($field=='reponse' )                        	
 			{!! Form::hidden($field,$value,array('id'=>$field)) !!}                        	                 	
 		@else 		
