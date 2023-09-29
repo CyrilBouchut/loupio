@@ -58,7 +58,9 @@
               						<a class="navbar-brand" class="dropdown-item" href="{{ url('/users') }}">                
                    						 {{ __('Utilisateurs') }}
               						</a>
-			   
+              						<a class="navbar-brand" class="dropdown-item" href="{{ url('/listeQuestions') }}">                
+                   						 {{ __('Liste des questions') }}
+              						</a>			   
                                 </div>
                             </li>      
                         

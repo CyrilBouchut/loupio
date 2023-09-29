@@ -18,12 +18,13 @@ class Controller extends BaseController
     }
     public function getEdit($id, $RechercheTiers = '')
     {
-       
+      //  var_dump('getEdit');die;
+        
+        
         return $this->getAbstract($id);
     }
     protected function getAbstract($id)
-    {
-        echo $id;die;
+    {        
         $item =  $this->mainRepository->getById($id);
        
         $arr = $this->getValues($item);

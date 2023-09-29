@@ -30,6 +30,7 @@
 		
 		@endif 			
 	@endforeach 
+	<img src="{{asset('/uploads/' . $quest['adresseImage'])}}" class="img-responsive"></br>
 	{!! Form::hidden('dejaVu', $dejaVu,array('id'=>'dejaVu')) !!}
 	{!! Form::hidden('NbrTentative', $NbrTentative,array('id'=>'NbrTentative')) !!}
 	{!! Form::hidden('HistoriqueReponse', '',array('id'=>'HistoriqueReponse')) !!}</br>
