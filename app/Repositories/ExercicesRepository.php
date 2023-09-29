@@ -5,9 +5,7 @@ use App\Questions;
 
 class ExercicesRepository  extends AbstractRepository
 {
-
-    protected $mainModel;
-    
+    protected $mainModel;    
     public function __construct(Questions $mainModel)
     {
         $this->mainModel = $mainModel;
