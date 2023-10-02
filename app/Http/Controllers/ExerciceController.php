@@ -30,12 +30,13 @@ class ExerciceController extends Controller
         $question = $this->mainRepository->getRandom($arrDejaVu=array());    
         $NbrTentative=1;
         $arrDejaVu[]=$question['id'];
-        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>''));
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>'','nombrePassages'=>1));
         
     }
     public function postExercice($type='', Request $request)
     {
         $remarqueTop='';
+        $nombrePassages=$request->input('nombrePassages');       
         if (strtoupper(trim($request->input('reponseEleve')))==strtoupper(trim($request->input('reponse')))){
             $remarqueTop='Dernière réponse correcte';
         } else {
@@ -45,12 +46,18 @@ class ExerciceController extends Controller
         $arrDejaVu =json_decode( $request->input('dejaVu'));  
         $this->mainRepository->enregistreReponse($request);
         $question = $this->mainRepository->getRandom($arrDejaVu);
-        $NbrTentative=1;
-        if ($question!=null){            
+        if ($question!=null){
             $arrDejaVu[]=$question['id'];
+
+        } else {
+            if ($nombrePassages<3){
+                $arrDejaVu=array();
+                $question = $this->mainRepository->getRandom($arrDejaVu);
+            }
+            $nombrePassages=$nombrePassages+1;
         }
-                  
-        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>$remarqueTop));
+        $NbrTentative=1;
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>$remarqueTop,'nombrePassages'=>$nombrePassages));
         
     }
     

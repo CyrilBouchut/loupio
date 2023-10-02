@@ -30,13 +30,14 @@
 	<img src="{{asset('/uploads/' . $quest['adresseImage'])}}" class="img-responsive">	
 	{!! Form::hidden('adresseImage', $quest['adresseImage'],array('id'=>'adresseImage')) !!}</br>
 	{!! Form::hidden('dejaVu', $dejaVu,array('id'=>'dejaVu')) !!}
-	{!! Form::hidden('nombrePassages', $dejaVu,array('id'=>'nombrePassages')) !!}
+	{!! Form::hidden('nombrePassages', $nombrePassages,array('id'=>'nombrePassages')) !!}
 	{!! Form::hidden('reponseOk', '0',array('id'=>'reponseOk')) !!}
 	{!! Form::hidden('NbrTentative', $NbrTentative,array('id'=>'NbrTentative')) !!}
 	{!! Form::hidden('HistoriqueReponse', '',array('id'=>'HistoriqueReponse')) !!}</br>
 	{!!Form::label('reponseCadeau','',['id'=>'reponseCadeau',"style"=>"display: none;"] )!!}
-	<img src="{{asset('/flecheDroite.png')}}" class="img-responsive" id='flecheDroite'  width="30" style="display: none;">	
-	<input name="reponseEleve" type="text" value="" id="reponseEleve">
+	<img src="{{asset('/flecheDroite.png')}}" class="img-responsive" id='flecheDroite'  width="30" style="display: none;">
+	{!!Form::text('reponseEleve','',['id'=>'reponseEleve','onKeyPress'=>"if(event.keyCode == 13) submitAction();" ] )!!}	
+	
 	<img src="{{asset('/valide.jpg')}}" class="img-responsive" id='imageValide'  width="30" style="display: none;" >
 	<img src="{{asset('/invalide.jpg')}}" class="img-responsive" id='imageInvalide'  width="30" style="display: none;"></br>							
 	{!!Form::text('remarque',$remarqueTop,['id'=>'remarque','readonly'=>'readonly', 'disabled'=>true,'size' => 50,"style"=>"display: none;"] )!!}</br>
@@ -48,6 +49,7 @@
 	    document.getElementById("submit_value").onclick = submitAction;					
         function submitAction()
         {
+            console.log('ici');
     		document.getElementById("submit_value").disabled = true;
     		document.getElementById("NbrTentative").value=parseInt(document.getElementById("NbrTentative").value)+1;
     		var json =document.getElementById("HistoriqueReponse").value
