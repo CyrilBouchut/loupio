@@ -18,7 +18,7 @@ class AbstractRepository
     }
 
     public function store(Array $inputs=array())
-    {        
+    {   
         $item = new $this->mainModel();
         $arr = $this->mainModel::DefaultValue;
         foreach($arr as $key=>$value){

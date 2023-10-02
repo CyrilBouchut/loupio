@@ -36,13 +36,14 @@ class ExerciceController extends Controller
     public function postExercice($type='', Request $request)
     {
         $remarqueTop='';
-        if ($request->input('reponseEleve')==$request->input('reponse')){
+        if (strtoupper(trim($request->input('reponseEleve')))==strtoupper(trim($request->input('reponse')))){
             $remarqueTop='Dernière réponse correcte';
         } else {
             $remarqueTop='Dernière réponse fausse. Bonne réponse : '.$request->input('reponse');
         }
              
-        $arrDejaVu =json_decode( $request->input('dejaVu'));       
+        $arrDejaVu =json_decode( $request->input('dejaVu'));  
+        $this->mainRepository->enregistreReponse($request);
         $question = $this->mainRepository->getRandom($arrDejaVu);
         $NbrTentative=1;
         if ($question!=null){            
