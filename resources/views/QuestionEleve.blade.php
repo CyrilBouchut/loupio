@@ -69,9 +69,8 @@
     			document.getElementById('submit_value').className = "btn btn-success";     
     			document.getElementById("imageValide").style.display = 'inline';
             	document.getElementById("imageInvalide").style.display = 'none';
-            	document.getElementById('submit_value').value='Suivant >>';
-            	document.getElementById("reponseEleve").disabled = false;
-            	 document.getElementById('reponseOk').value='1';  
+            	document.getElementById('submit_value').value='Suivant >>';            	
+            	document.getElementById('reponseOk').value='1';  
             } else {
             	document.getElementById('submit_value').className = "btn btn-primary";    
     			document.getElementById("imageValide").style.display = 'none';
@@ -88,8 +87,10 @@
                 }                	               
             }				
            
-            document.getElementById("submit_value").disabled = false;  
-            document.getElementById("reponseEleve").select();                              
+            document.getElementById("submit_value").disabled = false;
+            if (document.getElementById('submit_value').className != "btn btn-success"){
+            	document.getElementById("reponseEleve").select();
+            }                                            
         }
 		
 	 </script>
