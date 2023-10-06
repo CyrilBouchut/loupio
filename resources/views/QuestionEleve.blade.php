@@ -5,6 +5,18 @@
 			<div class="card">
 				<div class="card-header">
 					Question ?
+					
+					{{ Html::image('/etoile.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoile1')) }}
+					
+					{{ Html::image('/etoile.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoile2',"style"=>"display: none;")) }}
+					{{ Html::image('/etoileVide.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoileVide2')) }}
+					{{ Html::image('/etoile.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoile3',"style"=>"display: none;")) }}
+					{{ Html::image('/etoileVide.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoileVide3')) }}
+					{{ Html::image('/etoile.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoile4',"style"=>"display: none;")) }}
+					{{ Html::image('/etoileVide.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoileVide4')) }}
+					{{ Html::image('/etoile.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoile5',"style"=>"display: none;")) }}
+					{{ Html::image('/etoileVide.png', 'alt text', array('img-responsive' => 'css-class','width'=>"30",'id'=>'etoileVide5')) }}				
+					
 				</div>
 
 				<div class="card-body">
@@ -32,7 +44,10 @@
 	{!! Form::hidden('dejaVu', $dejaVu,array('id'=>'dejaVu')) !!}
 	{!! Form::hidden('nombrePassages', $nombrePassages,array('id'=>'nombrePassages')) !!}
 	{!! Form::hidden('reponseOk', '0',array('id'=>'reponseOk')) !!}
+	{!! Form::hidden('NbrQuestions', $NbrQuestions,array('id'=>'NbrQuestions')) !!}
+	{!! Form::hidden('NbrReponsesJuste', $NbrReponsesJuste,array('id'=>'NbrReponsesJuste')) !!}
 	{!! Form::hidden('NbrTentative', $NbrTentative,array('id'=>'NbrTentative')) !!}
+	{!! Form::hidden('ReponseJuste', '0',array('id'=>'ReponseJuste')) !!}
 	{!! Form::hidden('HistoriqueReponse', '',array('id'=>'HistoriqueReponse')) !!}</br>
 	{!!Form::label('reponseCadeau','',['id'=>'reponseCadeau',"style"=>"display: none;"] )!!}
 	<img src="{{asset('/flecheDroite.png')}}" class="img-responsive" id='flecheDroite'  width="30" style="display: none;">
@@ -43,9 +58,7 @@
 	{!!Form::text('remarque',$remarqueTop,['id'=>'remarque','readonly'=>'readonly', 'disabled'=>true,'size' => 50,"style"=>"display: none;"] )!!}</br>
 	<input class="btn btn-primary" value="Enregistrer" id="submit_value" >
 	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-		document.getElementById("reponseEleve").select();		
-	});
+
 	    document.getElementById("submit_value").onclick = submitAction;					
         function submitAction()
         {
@@ -62,10 +75,14 @@
     		document.getElementById("HistoriqueReponse").value=JSON.stringify(obj);
     	
     	    if (document.getElementById("reponseEleve").value.toUpperCase().trim()===document.getElementById("reponse").value.toUpperCase().trim() ){
-    			if (document.getElementById('reponseOk').value==='1'){                    
-                	document.getElementById("frmProduct").submit();                
+    			if (document.getElementById('reponseOk').value==='1'){
+                    if (document.getElementById("flecheDroite").style.display == 'none'){          
+                    	document.getElementById('ReponseJuste').value='1';
+                    }  
+ 					document.getElementById("frmProduct").submit();                	
                 	return false;
-                }	        	    
+                }      
+	 	        	    
     			document.getElementById('submit_value').className = "btn btn-success";     
     			document.getElementById("imageValide").style.display = 'inline';
             	document.getElementById("imageInvalide").style.display = 'none';
@@ -96,6 +113,33 @@
 	 </script>
 	{!! Form::close() !!}
 @endif 		
+	<script type="text/javascript">	
+	document.addEventListener('DOMContentLoaded', function() {
+			
+					@if ($NbrQuestions!=0)
+					    @if ($NbrReponsesJuste/$NbrQuestions>=0.25)
+                			document.getElementById("etoileVide2").style.display = 'none';
+                        	document.getElementById("etoile2").style.display = 'inline';					    
+					    @endif
+					    @if ($NbrReponsesJuste/$NbrQuestions>=0.5)
+                			document.getElementById("etoileVide3").style.display = 'none';
+                        	document.getElementById("etoile3").style.display = 'inline';					    
+					    @endif
+					    @if ($NbrReponsesJuste/$NbrQuestions>=0.75)
+                			document.getElementById("etoileVide4").style.display = 'none';
+                        	document.getElementById("etoile4").style.display = 'inline';					    
+					    @endif
+					    @if ($NbrReponsesJuste/$NbrQuestions>=1)
+                			document.getElementById("etoileVide5").style.display = 'none';
+                        	document.getElementById("etoile5").style.display = 'inline';					    
+					    @endif
+
+					    
+					@endif
+					document.getElementById("reponseEleve").select();
+	
+	});
+	</script>
 				</div>
 			</div>
 		</div>

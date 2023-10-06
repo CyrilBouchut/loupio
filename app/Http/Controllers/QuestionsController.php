@@ -42,13 +42,6 @@ class QuestionsController extends Controller
     public function postEdit($id,QuestionsRequest $request)
     {   
         
-   /*     $request->validate([
-            
-            'file' => 'required|mimes:pdf,xlx,csv|max:2048',
-            
-        ]);*/
-        
-      //  var_dump($request->file);die;
         if ($request->file!=null){
             $fileName = time().'.'.$request->file->extension();
              $request->file->move(public_path('uploads'), $fileName);

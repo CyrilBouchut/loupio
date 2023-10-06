@@ -30,13 +30,15 @@ class ExerciceController extends Controller
         $question = $this->mainRepository->getRandom($arrDejaVu=array());    
         $NbrTentative=1;
         $arrDejaVu[]=$question['id'];
-        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>'','nombrePassages'=>1));
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>'','nombrePassages'=>1,'NbrQuestions'=>0,'NbrReponsesJuste'=>0));
         
     }
     public function postExercice($type='', Request $request)
     {
         $remarqueTop='';
-        $nombrePassages=$request->input('nombrePassages');       
+        $nombrePassages=$request->input('nombrePassages');  
+        $NbrQuestions=$request->input('NbrQuestions');
+        $NbrReponsesJuste=$request->input('NbrReponsesJuste')+$request->input('ReponseJuste');       
         if (strtoupper(trim($request->input('reponseEleve')))==strtoupper(trim($request->input('reponse')))){
             $remarqueTop='Dernière réponse correcte';
         } else {
@@ -50,14 +52,17 @@ class ExerciceController extends Controller
             $arrDejaVu[]=$question['id'];
 
         } else {
-            if ($nombrePassages<3){
+            if ($nombrePassages<2){
                 $arrDejaVu=array();
                 $question = $this->mainRepository->getRandom($arrDejaVu);
             }
             $nombrePassages=$nombrePassages+1;
         }
+        if ($question!=null){
+            $NbrQuestions=$NbrQuestions+1;
+        }
         $NbrTentative=1;
-        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>$remarqueTop,'nombrePassages'=>$nombrePassages));
+        return view('QuestionEleve', array('quest'=>$question,'dejaVu'=>json_encode($arrDejaVu),'NbrTentative'=>$NbrTentative,'type'=>$type,'remarqueTop'=>$remarqueTop,'nombrePassages'=>$nombrePassages,'NbrQuestions'=>$NbrQuestions,'NbrReponsesJuste'=>$NbrReponsesJuste));
         
     }
     
